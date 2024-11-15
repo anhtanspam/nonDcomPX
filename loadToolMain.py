@@ -16,7 +16,6 @@ import dataLoad
 class ProfileManager:
     def __init__(self):
         self.fileExcelLoad = pd.read_excel(f'{dataLoad.fileExcelLoad}', sheet_name="Sheet1")
-        self.portProxyFrom = int(dataLoad.portProxyFrom)
         self.linkNoteAccFail = dataLoad.fileAccFail
         self.linkNoteAccDie = dataLoad.fileAccDie
         self.accPerTurn = int(dataLoad.accPerTurn)

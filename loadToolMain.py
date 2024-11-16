@@ -95,7 +95,7 @@ class ProfileManager:
                     with open(self.linkNoteAccDie, 'a+') as noteAccDie:
                         noteAccDie.write(f'{tenProfile}|Die\n')
                     time.sleep(1)
-                    self.close_profile(self, profile_id)
+                    self.close_profile(profile_id)
                 else:pass
                 try:
                     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//h4[text()="Log in to Telegram by QR Code"]')))

@@ -14,7 +14,7 @@ import random
 import dataLoad
 class ProfileManager:
     def __init__(self):
-        self.fileExcelLoad = pd.read_excel(f'{dataLoad.fileExcelLoad}', sheet_name="Sheet1")
+        self.fileExcelLoad = pd.read_excel(f'{dataLoad.fileExcelLoad}', sheet_name="Sheet2")
         self.linkNoteAccFail = dataLoad.fileAccFail
         self.linkNoteAccDie = dataLoad.fileAccDie
         self.accPerTurn = int(dataLoad.accPerTurn)
@@ -117,7 +117,7 @@ class ProfileManager:
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
                     time.sleep(3)
-                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))       
+                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))          
                 except:pass                      
                 try:
                     print(f">>>{tenProfile}>>> Claim pixel ")
@@ -243,7 +243,7 @@ class ProfileManager:
             driver.execute_script("arguments[0].click();", element)
         except:pass
         iframe = WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@class="payment-verification"]')))
-        print(f"{tenProfile} wait 10s for Checking banner popup to close ...")       
+        print(f"{tenProfile} wait 10s for Checking banner popup to close ...")
         try:
             element = WebDriverWait(driver, 6).until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Go to Web version"]')))
             actions = ActionChains(driver)

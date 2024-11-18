@@ -117,8 +117,7 @@ class ProfileManager:
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
                     time.sleep(3)
-                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]'))) 
-                    break           
+                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))       
                 except:pass                      
                 try:
                     print(f">>>{tenProfile}>>> Claim pixel ")

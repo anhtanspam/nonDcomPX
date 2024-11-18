@@ -244,13 +244,7 @@ class ProfileManager:
             driver.execute_script("arguments[0].click();", element)
         except:pass
         iframe = WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@class="payment-verification"]')))
-        print(f"{tenProfile} wait 10s for Checking banner popup to close ...")
-        try:
-            element = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_container_1df7o_14"]//div[@class="_header_q0ezh_11"]/div[1]')))
-            actions = ActionChains(driver)
-            actions.move_to_element(element).click().perform()
-            time.sleep(2)
-        except:pass
+        print(f"{tenProfile} wait 10s for Checking banner popup to close ...")       
         try:
             element = WebDriverWait(driver, 6).until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Go to Web version"]')))
             actions = ActionChains(driver)

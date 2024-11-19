@@ -117,9 +117,7 @@ class ProfileManager:
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
                     time.sleep(3)
-                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))          
-                except:pass                      
-                try:
+                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))
                     print(f">>>{tenProfile}>>> Claim pixel ")
                     time.sleep(1)
                     element = driver.find_element(By.XPATH, '//div[text()="Your balance"]')
@@ -128,8 +126,6 @@ class ProfileManager:
                     element = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//span[text()="Claim"]')))
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
-                except:pass
-                try:
                     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="CLAIM IN "]')))
                     print(f">>>{tenProfile}>>> Đã claim xong>>>Vào vẽ tranh")
                     break

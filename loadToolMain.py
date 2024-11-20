@@ -59,7 +59,7 @@ class ProfileManager:
                 print(f"Đã có lỗi xảy ra: {tenProfile}>>>Đang quay lại từ đầu.")
                 time.sleep(5)
                 continue
-        self.fang_game_notpixel(driver, tenProfile, profile_id)
+        self.notpixel_fang(driver, tenProfile, profile_id)
     def calculate_window_position(self, x):
         line1 = x * 505
         line2 = (x-10)*505
@@ -78,7 +78,7 @@ class ProfileManager:
                 time.sleep(0.3)
         except:
             time.sleep(0.5)
-    def fang_game_notpixel(self, driver, tenProfile, profile_id):
+    def notpixel_fang(self, driver, tenProfile, profile_id):
         try:
             for checkAcc in range(8):
                 driver.get("chrome://settings/")
@@ -97,7 +97,9 @@ class ProfileManager:
                 try:
                     element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//h4[text()="Log in to Telegram by QR Code"]')))
                     print(f'{tenProfile}>>>acc DIE')
-                    self.save_fail_info(tenProfile, profile_id)
+                    with open(self.linkNoteAccDie, 'a+') as noteAccDie:
+                        noteAccDie.write(f'{tenProfile}|Die\n')
+                    time.sleep(1)
                     self.close_profile(profile_id)
                 except:pass
                 try:
@@ -113,20 +115,23 @@ class ProfileManager:
                 else:pass
                 try:
                     self.log_fang_game(tenProfile, driver)
-                    element = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_buttons_container_rjvnl_1"]//button[@class="_button_rjvnl_1"]/*[@class="_button_img_rjvnl_124"]')))
+                    element = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[1]/div[1]/div[2]/div[2]/button[1]/*[1]')))
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
                     time.sleep(3)
-                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))
+                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="Your balance"]')))                               
+                
                     print(f">>>{tenProfile}>>> Claim pixel ")
                     time.sleep(1)
                     element = driver.find_element(By.XPATH, '//div[text()="Your balance"]')
                     driver.execute_script("arguments[0].scrollIntoView();", element)
                     time.sleep(2)
+
                     element = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//span[text()="Claim"]')))
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
-                    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[text()="CLAIM IN "]')))
+                
+                    element = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, '//div[text()="CLAIM IN "]')))
                     print(f">>>{tenProfile}>>> Đã claim xong>>>Vào vẽ tranh")
                     break
                 except:pass      
@@ -138,7 +143,7 @@ class ProfileManager:
                 else:pass
                 try:
                     self.log_fang_game(tenProfile, driver)
-                    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//div[@class="_buttons_container_srn55_18"]/button[2]/*[@alt="img"]')))
+                    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//div[@class="_buttons_container_srn55_18"]/button[3]//*[@class="_image_xsy81_19"]')))
                     break
                 except:pass
             print(f" >>>{tenProfile} >>> pick màu")
@@ -168,7 +173,13 @@ class ProfileManager:
                     actions = ActionChains(driver)
                     actions.move_to_element(element).click().perform()
                     try:
+                        element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, xpath_son)))
+                        actions = ActionChains(driver)
+                        actions.move_to_element(element).click().perform()
+                    except:pass
+                    try:
                         element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, xpath_father)))
+                        break
                     except:
                         element = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, xpath_son)))
                         actions = ActionChains(driver)
@@ -186,19 +197,24 @@ class ProfileManager:
             for painting in range(1,100,1):
                 randomWait = random.randint(5,12)
                 waitTime = randomWait / 10
-                time.sleep(waitTime)
+                time.sleep(waitTime)                
+                element = WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.XPATH, '//button[@class="_button_1ley0_143"]//div[@class="_counter_oxfjd_32"]/span[2]')))
+                soLuot = element.text
+                if soLuot== "0":
+                    print(f">>>@@@@@{tenProfile} >>> Hết lượt tô màu, Đóng profile sau 3 giây...")
+                    time.sleep(1)
+                    break
+                else:pass
                 try:
-                    element = WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.XPATH, '//button[@class="_button_1ley0_143"]//div[@class="_counter_oxfjd_32"]/span[2]')))
-                    soLuot = element.text
-                    if soLuot== "0":
-                        print(f">>>@@@@@{tenProfile} >>> Hết lượt tô màu, Đóng profile sau 3 giây...")
-                        time.sleep(1)
-                        break
-                    else:pass                
-                    element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_buttons_container_srn55_18"]/button[2]/*[@alt="img"]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()                                
-                    element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//div[@class="_buttons_container_srn55_18"]//div[@class="_container_srbwq_1"]')))
+                    while True:
+                        try:
+                            element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//div[@class="_buttons_container_srn55_18"]//div[@class="_container_srbwq_1"]')))
+                            break
+                        except:
+                            element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_buttons_container_srn55_18"]/button[3]//*[@class="_image_xsy81_19"]')))
+                            actions = ActionChains(driver)
+                            actions.move_to_element(element).click().perform()                                
+                    
                     while True:
                         element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAFVBMVEVHcEz/3Jr/6ADjygD/AAC5AAAAAAB/sfDAAAAAAXRSTlMAQObYZgAAAJJJREFUeNrt2bEJBCEQQNFrYVqwhWnBFq6F338Jx4IiyIG76ez/iRjMiwyE+Zj9i0MC9QGA7yEAgarAGu6HJiJQHTgnICAgIFAbAHgGrARqAACZmROIiAC4zt573+8TaK01gWLA6O5DyswUqAVcMXoCzGGBCsBqAjGCVYz2D4ZAbWBP4EXA6AQACJQB3LEImO39AJS0GBsvGYIKAAAAAElFTkSuQmCC"]')))
                         actions = ActionChains(driver)
@@ -215,19 +231,20 @@ class ProfileManager:
                             soLanChamBi = int(soLuot1)
                             for clickPaint in range(soLanChamBi):
                                 random_x = random.randint(-50, 50)
-                                random_y = random.randint(-50, 15)                            
+                                random_y = random.randint(-50, 15)
                                 actions = ActionChains(driver)
                                 actions.move_to_element_with_offset(canvas, random_x, random_y).click().perform()
-                                valueWait = random.randint(1,9) /10
+                                valueWait = random.randint(2,9) /10
                                 time.sleep(valueWait)
                 except:pass           
             time.sleep(1)
         except Exception as e:
-            print(f"Acc {tenProfile} FAIL-saving info to file note !!!! Error: {str(e)}")
+            print(f"Acc {tenProfile} Pain notpixel FAIL-saving info to file note !!!!")
             self.save_fail_info(tenProfile, profile_id)
             self.close_profile(profile_id)
         finally:
             self.close_profile(profile_id)
+    ###lognotpixel
     def log_fang_game(self, tenProfile, driver):
         driver.get("chrome://settings/")
         time.sleep(1)
@@ -240,18 +257,19 @@ class ProfileManager:
         except:pass
         iframe = WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@class="payment-verification"]')))
         print(f"{tenProfile} wait 10s for Checking banner popup to close ...")
-        try:
-            element = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_container_n1egb_1"]//div[@class="_close_n1egb_30"]')))
-            actions = ActionChains(driver)
-            actions.move_to_element(element).click().perform()
-            time.sleep(2)
-        except:pass
-        try:
-            element = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_container_1tvc9_5"]/div[1]')))
-            actions = ActionChains(driver)
-            actions.move_to_element(element).click().perform()
-            time.sleep(2)
-        except:pass
+        for closeBanner in range(3):
+            try:
+                element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                actions = ActionChains(driver)
+                actions.move_to_element(element).click().perform()
+                time.sleep(2)
+            except:pass
+            try:
+                element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                actions = ActionChains(driver)
+                actions.move_to_element(element).click().perform()
+                time.sleep(2)
+            except:pass
     def save_fail_info(self, tenProfile, profile_id):
         with open(self.linkNoteAccFail, 'a+') as noteAccFail:
             noteAccFail.write(f'{tenProfile}|{profile_id}|error #NOTPIXEL paint\n')

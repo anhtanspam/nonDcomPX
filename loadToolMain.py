@@ -247,33 +247,11 @@ class ProfileManager:
             time.sleep(2)
         except:pass
         try:
-            element = WebDriverWait(driver, 6).until(EC.element_to_be_clickable((By.XPATH, '//button[text()="Go to Web version"]')))
+            element = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_container_1tvc9_5"]/div[1]')))
             actions = ActionChains(driver)
             actions.move_to_element(element).click().perform()
-            time.sleep(3)
-            try:
-                for tab in range(1,3):
-                    driver.switch_to.window(driver.window_handles[tab])
-                    driver.close()
-                    time.sleep(0.3)
-            except:time.sleep(0.5)
-            driver.switch_to.window(driver.window_handles[0])
-            iframe = WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@class="payment-verification"]')))
-            time.sleep(1)
-        except:pass        
-        for closeBanner in range(2):
-            try:
-                element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_container_1df7o_14"]//div[@class="_header_q0ezh_11"]/div[1]')))
-                actions = ActionChains(driver)
-                actions.move_to_element(element).click().perform()
-                time.sleep(2)
-            except:pass
-            try:
-                element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_container_1df7o_14"]//div[@class="_header_n1egb_11"]/div[2]/div[1]')))
-                actions = ActionChains(driver)
-                actions.move_to_element(element).click().perform()
-                time.sleep(2)
-            except:pass
+            time.sleep(2)
+        except:pass
     def save_fail_info(self, tenProfile, profile_id):
         with open(self.linkNoteAccFail, 'a+') as noteAccFail:
             noteAccFail.write(f'{tenProfile}|{profile_id}|error #NOTPIXEL paint\n')

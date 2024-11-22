@@ -150,7 +150,25 @@ class ProfileManager:
             canvas = driver.find_element(By.ID, 'canvasHolder')
             canvas_location = canvas.location
             canvas_size = canvas.size
-            while True:
+            for enable_lable1 in range(10):
+                try:
+                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
+                try:
+                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
+                try:
+                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[9]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
                 time.sleep(1)
                 try:
                     random_x = random.randint(-10, 11)
@@ -166,7 +184,25 @@ class ProfileManager:
             time.sleep(5)
             xpath_father = f'//div[@class="_order_panel_1ley0_1"]//div[@class="_info_1ley0_38"]/div[@style="background-color: rgb{self.colour_in_rgb};"]'
             xpath_son = f'//div[@class="_color_line_epppt_15"]//div[@style="background-color: rgb{self.colour_in_rgb};"]'
-            while True:
+            for enable_label2 in range(10):
+                try:
+                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
+                try:
+                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
+                try:
+                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[9]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
                 print(f"{tenProfile}>>>ĐANG PICK COLOUR")
                 try:
                     element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_order_panel_1ley0_1"]//div[@class="_info_1ley0_38"]/div[1]')))
@@ -219,7 +255,7 @@ class ProfileManager:
                         element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACABAMAAAAxEHz4AAAAFVBMVEVHcEz/3Jr/6ADjygD/AAC5AAAAAAB/sfDAAAAAAXRSTlMAQObYZgAAAJJJREFUeNrt2bEJBCEQQNFrYVqwhWnBFq6F338Jx4IiyIG76ez/iRjMiwyE+Zj9i0MC9QGA7yEAgarAGu6HJiJQHTgnICAgIFAbAHgGrARqAACZmROIiAC4zt573+8TaK01gWLA6O5DyswUqAVcMXoCzGGBCsBqAjGCVYz2D4ZAbWBP4EXA6AQACJQB3LEImO39AJS0GBsvGYIKAAAAAElFTkSuQmCC"]')))
                         actions = ActionChains(driver)
                         actions.move_to_element(element).click().perform()
-                        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//button[@class="_button_j77dp_27 _fast_type_button_j77dp_49 _shop_button_j77dp_44 _fast_mode_button_enabled_j77dp_72"]')))
+                        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//button[@class="_button_mp208_27 _fast_type_button_mp208_49 _shop_button_mp208_44 _fast_mode_button_enabled_mp208_71"]')))
                         break
                     while True:
                         element = WebDriverWait(driver, 25).until(EC.presence_of_element_located((By.XPATH, '//button[@class="_button_1ley0_143"]//div[@class="_counter_oxfjd_32"]/span[2]')))
@@ -256,8 +292,9 @@ class ProfileManager:
             driver.execute_script("arguments[0].click();", element)
         except:pass
         iframe = WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@class="payment-verification"]')))
-        print(f"{tenProfile} wait 10s for Checking banner popup to close ...")
-        for closeBanner in range(3):
+        
+        for closeBanner in range(1,4,1):
+            print(f"{tenProfile} Checking banner popup to close turn {closeBanner}/3...")
             try:
                 element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
                 actions = ActionChains(driver)
@@ -266,6 +303,12 @@ class ProfileManager:
             except:pass
             try:
                 element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
+                actions = ActionChains(driver)
+                actions.move_to_element(element).click().perform()
+                time.sleep(2)
+            except:pass
+            try:
+                element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[9]//span[@class="_telegram_icons_1fn8i_13 "]')))
                 actions = ActionChains(driver)
                 actions.move_to_element(element).click().perform()
                 time.sleep(2)

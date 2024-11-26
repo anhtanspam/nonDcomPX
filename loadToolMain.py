@@ -151,24 +151,17 @@ class ProfileManager:
             canvas_location = canvas.location
             canvas_size = canvas.size
             for enable_lable1 in range(10):
-                try:
-                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()
-                    time.sleep(2)
-                except:pass
-                try:
-                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()
-                    time.sleep(2)
-                except:pass
-                try:
-                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[9]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()
-                    time.sleep(2)
-                except:pass
+                for closeBanner in range(1,3,1):
+                    print(f"{tenProfile} Checking banner popup to close turn {closeBanner}/3...")
+                    for number_xpath in range(7,11,1):
+                        xpath_Close_string = str(number_xpath)
+                        xpath_close_banner = f'//div[@id="root"]/div[1]/div[{xpath_Close_string}]//span[@class="_telegram_icons_1fn8i_13 "]'            
+                        try:
+                            element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, xpath_close_banner)))
+                            actions = ActionChains(driver)
+                            actions.move_to_element(element).click().perform()
+                            time.sleep(2)
+                        except:pass
                 time.sleep(1)
                 try:
                     random_x = random.randint(-10, 11)
@@ -184,25 +177,7 @@ class ProfileManager:
             time.sleep(5)
             xpath_father = f'//div[@class="_order_panel_1ley0_1"]//div[@class="_info_1ley0_38"]/div[@style="background-color: rgb{self.colour_in_rgb};"]'
             xpath_son = f'//div[@class="_color_line_epppt_15"]//div[@style="background-color: rgb{self.colour_in_rgb};"]'
-            for enable_label2 in range(10):
-                try:
-                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()
-                    time.sleep(2)
-                except:pass
-                try:
-                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()
-                    time.sleep(2)
-                except:pass
-                try:
-                    element = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[9]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                    actions = ActionChains(driver)
-                    actions.move_to_element(element).click().perform()
-                    time.sleep(2)
-                except:pass
+            for enable_label2 in range(10):                
                 print(f"{tenProfile}>>>ĐANG PICK COLOUR")
                 try:
                     element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="_order_panel_1ley0_1"]//div[@class="_info_1ley0_38"]/div[1]')))
@@ -292,27 +267,17 @@ class ProfileManager:
             driver.execute_script("arguments[0].click();", element)
         except:pass
         iframe = WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@class="payment-verification"]')))
-        
         for closeBanner in range(1,4,1):
             print(f"{tenProfile} Checking banner popup to close turn {closeBanner}/3...")
-            try:
-                element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[8]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                actions = ActionChains(driver)
-                actions.move_to_element(element).click().perform()
-                time.sleep(2)
-            except:pass
-            try:
-                element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[7]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                actions = ActionChains(driver)
-                actions.move_to_element(element).click().perform()
-                time.sleep(2)
-            except:pass
-            try:
-                element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="root"]/div[1]/div[9]//span[@class="_telegram_icons_1fn8i_13 "]')))
-                actions = ActionChains(driver)
-                actions.move_to_element(element).click().perform()
-                time.sleep(2)
-            except:pass
+            for number_xpath in range(7,11,1):
+                xpath_Close_string = str(number_xpath)
+                xpath_close_banner = f'//div[@id="root"]/div[1]/div[{xpath_Close_string}]//span[@class="_telegram_icons_1fn8i_13 "]'            
+                try:
+                    element = WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.XPATH, xpath_close_banner)))
+                    actions = ActionChains(driver)
+                    actions.move_to_element(element).click().perform()
+                    time.sleep(2)
+                except:pass
     def save_fail_info(self, tenProfile, profile_id):
         with open(self.linkNoteAccFail, 'a+') as noteAccFail:
             noteAccFail.write(f'{tenProfile}|{profile_id}|error #NOTPIXEL paint\n')
